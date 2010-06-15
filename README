@@ -1,0 +1,27 @@
+=== Listmaker: Mailman List Population from LDAP  =============================
+
+Copyright 2010 (c) 2010, Joshua M. Clulow <josh@sysmgr.org>
+All rights reserved.  See LICENSE.txt for BSD license details.
+
+--- Overview ------------------------------------------------------------------
+
+We started out with direct LDAP integration into mailman for a mailing list 
+with some 26000 entries but it was problematic at best -- the lookups take 
+quite a while and seemed to make the mailman web interface unresponsive.
+
+Listmaker will pull a list of objects from an LDAP directory (using a custom
+filter) and diff this list against the current mailman list membership for
+a given list.
+
+Configuration is relatively straightforward -- take the example.properties file
+and configure up as many lists/directories/etc as you like.  Then make a 
+cron job thus:
+
+  ./listmaker -p ~/props.file list-name
+
+
+NB: You'll need to ensure that whatever bind account you use has no maximum
+search limit -- for now listmaker uses no paging of any kind as none was 
+available in the target LDAP directory.  Patches welcome!
+
+-------------------------------------------------------------------------------

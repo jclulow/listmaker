@@ -1,0 +1,11 @@
+#!/bin/ksh
+
+JAVA_HOME="${JAVA_HOME:-/opt/java}"
+export JAVA_HOME
+
+echo "'$@'"
+MAVEN_OPTS="-Xmx256m " \
+mvn -e exec:java -Dexec.mainClass=org.sysmgr.listmaker.Main -Dexec.args="$*"
+
+stty sane
+

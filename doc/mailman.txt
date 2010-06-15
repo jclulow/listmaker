@@ -1,0 +1,16 @@
+To list members:
+================
+
+  /opt/mailman/bin/list_members all-students
+
+To add members to a list:
+=========================
+
+  /opt/mailman/bin/add_members -r - -w n -a n all-students
+
+To remove them:
+===============
+
+  /opt/mailman/bin/remove_members -f - -n -N all-students
+
+

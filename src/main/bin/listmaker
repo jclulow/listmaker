@@ -1,0 +1,31 @@
+#!/bin/ksh
+
+DIR="$(dirname $0)/.."
+CMD="$(basename $0)"
+cd ${DIR} || exit 1
+
+CLASSPATH="config:classes"
+
+for F in lib/*.jar
+do	CLASSPATH="${CLASSPATH}:${F}"
+done
+export CLASSPATH
+
+export JAVA_HOME=/opt/java
+
+case "${CMD}" in
+	listmaker)
+		STARTCLASS="org.sysmgr.listmaker.Main"
+		${JAVA_HOME}/bin/java \
+			-classpath "${CLASSPATH}" \
+			-Xmx256m \
+			-server "${STARTCLASS}" \
+			"$@"
+		;;
+	*)
+		echo "Unknown command: ${CMD}.  Aborting."
+		exit 111
+		;;
+esac
+	
+
